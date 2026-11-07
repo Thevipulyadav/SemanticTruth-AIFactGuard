@@ -23,4 +23,152 @@
 
 ---
 
-## 📸 Architecture & Workflow
+## 📸 Screenshots & Architecture
+
+```
+[User Input: Web URL or News Text]
+                │
+                ▼
+      ┌──────────────────┐
+      │  Headless Scraper│ (If URL: extracts title, body, strips boilerplate)
+      └─────────┬────────┘
+                │
+                ▼
+      ┌─────────────────────────┐
+      │  NLP Feature Extraction │ (TF-IDF bi-gram coordinates + Tokenizer)
+      └─────────┬───────────────┘
+                │
+       ┌────────┴────────┐
+       ▼                 ▼
+┌──────────────┐  ┌────────────────────────┐
+│ ML Posterior │  │ Stylometric Heuristics │ (Sensationalism, Caps, Quotes,
+│ Probability  │  │ & Source Attributions  │  Journalistic attribution signals)
+└──────┬───────┘  └───────────┬────────────┘
+       │                      │
+       └──────────┬───────────┘
+                  ▼
+      ┌─────────────────────────┐
+      │ Hybrid Consensus Engine │
+      └───────────┬─────────────┘
+                  │
+                  ▼
+ [Verdict: REAL / FAKE + Confidence % + "Basis of Answer" Explanation]
+```
+
+---
+
+## ⚙️ Tech Stack
+
+* **Backend**: Python 3.10+, Flask 3.1, Werkzeug Security
+* **Machine Learning & NLP**: Scikit-Learn, TF-IDF Vectorizer (N-grams 1–2), Logistic Regression, Joblib
+* **Data Extraction**: BeautifulSoup4, Requests, urllib
+* **Database**: SQLite3 (Users, Analysis Audit Logs)
+* **Frontend**: HTML5, Modern CSS3 (Glassmorphism, CSS Custom Properties), JavaScript (Async Fetch API), FontAwesome 6
+
+---
+
+## 📊 Machine Learning & NLP Architecture
+
+The core model was trained on a benchmark corpus of **44,890+ verified articles** (ISOT News Dataset) sanitized to eliminate publisher watermarks and wire agency artifacts:
+
+| Metric | Score |
+| :--- | :--- |
+| **Validation Accuracy** | **98.63%** |
+| **Inference Latency** | **< 0.25 seconds** |
+| **Vocabulary Matrix** | **35,000 N-Gram Coordinates** |
+| **Model Size** | **0.70 MB (Serialized via Joblib)** |
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/YOUR-USERNAME/SemanticTruth-AIFactGuard.git
+cd SemanticTruth-AIFactGuard
+```
+
+### 2. Set Up Virtual Environment
+```bash
+# Windows
+python -m venv .venv
+.\.venv\Scripts\activate
+
+# macOS / Linux
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+### 3. Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Run the Application
+```bash
+python app.py
+```
+
+Open your browser and navigate to:
+```
+http://127.0.0.1:5000/
+```
+
+---
+
+## 🧪 Automated Testing
+
+Run the full end-to-end integration test suite:
+```bash
+python test_app.py
+```
+**Test Coverage Includes:**
+* Landing page routing & component rendering
+* Real-time API classification (`/api/analyze`) for genuine & deceptive news
+* User registration, session authentication, and history dashboard logging
+* Health API checks
+
+---
+
+## 📁 Project Directory Structure
+
+```
+SemanticTruth-AIFactGuard/
+├── app.py                # Main Flask web application & API routing
+├── database.py           # SQLite3 database helper & user session manager
+├── ml_engine.py          # Unified hybrid ML engine & linguistic explainer
+├── fake_news.py          # Entrypoint wrapper
+├── train_unified.py      # Script to train & serialize the clean ML pipeline
+├── test_app.py           # Automated integration test suite
+├── requirements.txt      # Python dependencies
+├── README.md             # Project documentation
+├── .gitignore            # Git exclusion rules
+├── saved_models/         # Pre-trained serialized models (.joblib)
+│   └── model_unified.joblib
+├── templates/            # HTML templates (Jinja2)
+│   ├── base.html         # Master layout & navigation
+│   ├── landing.html      # Project showcase & overview
+│   ├── detector.html     # Real-time credibility checker
+│   ├── login.html        # User authentication: Sign in
+│   ├── register.html     # User authentication: Sign up
+│   ├── dashboard.html    # User history & audit analytics
+│   └── partials/         # Modular template snippets
+└── static/               # Static assets
+    ├── css/style.css     # Cyber glassmorphism styling
+    └── images/           # Badges & institutional assets
+```
+
+---
+
+## 👨‍💻 Project Creator
+
+**Vipul Yadav**  
+*Master of Computer Applications (MCA) Candidate*  
+**Cochin University of Science and Technology (CUSAT)**  
+*Focus*: Applied Artificial Intelligence, NLP, and Full-Stack Engineering.
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License** — feel free to use it for academic, research, and non-commercial development.
